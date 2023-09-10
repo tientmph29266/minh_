@@ -3,21 +3,33 @@
 <head>
   <title>Đăng ký và Đăng nhập</title>
   <script src="main.js"></script>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <h1>Đăng ký và Đăng nhập</h1>
+  <div class="banner">
+    <img src="img/tải xuống.png" alt="" width="70px">
+      <a href="#">New $ Feartured</a>
+      <a href="#">Men</a>
+      <a href="#">Woman</a>
+      <a href="#">Kids</a>
+      <a href="#">Sale</a>
+      <input type="text" placeholder="Seach">
+  </div>
+ <div class="container">
+  <div id="message"></div>
   <div id="signup">
     <h2>Đăng ký</h2>
-    <input type="text" id="signupUsername" placeholder="Tên đăng nhập">
-    <input type="password" id="signupPassword" placeholder="Mật khẩu">
+    <input type="text" id="signupUsername" placeholder="Tên đăng nhập" ><br>
+    <input type="password" id="signupPassword" placeholder="Mật khẩu"><br>
     <button onclick="validateSignup()">Đăng ký</button>
   </div>
   <div id="login">
     <h2>Đăng nhập</h2>
-    <input type="text" id="loginUsername" placeholder="Tên đăng nhập">
-    <input type="password" id="loginPassword" placeholder="Mật khẩu">
+    <input type="text" id="loginUsername" placeholder="Tên đăng nhập"><br>
+    <input type="password" id="loginPassword" placeholder="Mật khẩu"><br>
     <button onclick="validateLogin()">Đăng nhập</button>
   </div>
-  <div id="message"></div>
+
+ </div>
 </body>
 </html>

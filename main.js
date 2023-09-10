@@ -3,7 +3,7 @@ function validateSignup() {
   var password = document.getElementById("signupPassword").value;
 
   if (username.trim() === '') {
-    document.getElementById("message").innerHTML = "Vui lòng nhập tên đăng Ký!";
+    document.getElementById("message").innerHTML = "Vui lòng nhập tên !";
   } else if (password.trim() === '') {
     document.getElementById("message").innerHTML = "Vui lòng nhập mật khẩu!";
   } else {
