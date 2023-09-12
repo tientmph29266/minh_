@@ -2,12 +2,30 @@ function validateSignup() {
   var username = document.getElementById("signupUsername").value;
   var password = document.getElementById("signupPassword").value;
 
-  if (username.trim() === '') {
-    document.getElementById("message").innerHTML = "Vui lòng nhập tên !";
-  } else if (password.trim() === '') {
-    document.getElementById("message").innerHTML = "Vui lòng nhập mật khẩu!";
+
+  if (username && password) {
+
+    var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+
+    var existingUser = userList.find(function (user) {
+      return user.username === username;
+    });
+
+    if (existingUser) {
+      alert("Tên đăng nhập đã tồn tại!");
+    } else {
+
+      userList.push({ username: username, password: password });
+
+
+      localStorage.setItem("userList", JSON.stringify(userList));
+
+      alert("Đăng ký thành công!");
+      displayUserList();
+    }
   } else {
-    signup(username, password);
+    alert("Vui lòng điền đầy đủ thông tin đăng ký!");
   }
 }
 
@@ -15,28 +33,48 @@ function validateLogin() {
   var username = document.getElementById("loginUsername").value;
   var password = document.getElementById("loginPassword").value;
 
-  if (username.trim() === '') {
-    document.getElementById("message").innerHTML = "Vui lòng nhập tên đăng nhập!";
-  } else if (password.trim() === '') {
-    document.getElementById("message").innerHTML = "Vui lòng nhập mật khẩu!";
+
+  if (username && password) {
+
+    var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+
+    var authenticatedUser = userList.find(function (user) {
+      return user.username === username && user.password === password;
+    });
+
+    if (authenticatedUser) {
+      alert("Đăng nhập thành công!");
+    } else {
+      alert("Tên đăng nhập hoặc mật khẩu không chính xác!");
+    }
   } else {
-    login(username, password);
+    alert("Vui lòng điền đầy đủ thông tin đăng nhập!");
   }
 }
 
-function signup(username, password) {
-  if (localStorage.getItem(username)) {
-    document.getElementById("message").innerHTML = "Tên đăng nhập đã tồn tại!";
+function displayUserList() {
+  var userListElement = document.getElementById("userList");
+
+
+  userListElement.innerHTML = "";
+
+
+  var userList = JSON.parse(localStorage.getItem("userList")) || [];
+
+  if (userList.length > 0) {
+
+    userList.forEach(function (user) {
+      var listItem = document.createElement("li");
+      listItem.textContent = "Tên đăng nhập: " + user.username + ", Mật khẩu: " + user.password;
+      userListElement.appendChild(listItem);
+    });
   } else {
-    localStorage.setItem(username, password);
-    document.getElementById("message").innerHTML = "Đăng ký thành công!";
+    var listItem = document.createElement("li");
+    listItem.textContent = "Không có người dùng nào trong danh sách";
+    userListElement.appendChild(listItem);
   }
 }
 
-function login(username, password) {
-  if (localStorage.getItem(username) === password) {
-    document.getElementById("message").innerHTML = "Đăng nhập thành công!";
-  } else {
-    document.getElementById("message").innerHTML = "Sai tên đăng nhập hoặc mật khẩu!";
-  }
-}
+
+displayUserList();
